@@ -1,0 +1,17 @@
+header{
+    height: 200px;
+    width: auto;
+    background-color: grey
+}
+
+body{
+    background-color: yellow;
+    height: 500px;
+    width: auto;
+}
+
+footer{
+    height: 100px;
+    width: auto;
+    background-color: blue;
+}

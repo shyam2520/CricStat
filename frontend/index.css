@@ -1,0 +1,65 @@
+.login-page{
+    text-align: center;
+}
+
+header{
+    height: 200px;
+    width: 100%;
+    background-color: grey;
+    padding: 30px;
+}
+
+footer{
+    height: 100px;
+    width: auto;
+    background-color: blue;
+}
+
+.split{
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+}
+
+.home{
+    height: 40%;
+    vertical-align: middle;
+    background-image: url('../images/home.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.login{
+    height: 60%;
+    background-image: -webkit-linear-gradient(135deg, #0eeff0 30%, #088f90 90%);
+    background-image: linear-gradient(135deg, #0eeff0 30%, #088f90 90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*border: 3px solid #f1f1f1;
+    /*margin: 150px 0px 50px 0px;
+    height: 500px;*/ 
+}
+
+.textArea{
+    background-color:rgba(255,255,0,0.5);
+    color:black;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-start;
+}
+
+.wrapper{
+    background-image: -webkit-linear-gradient(135deg, #0eeff0 30%, #088f90 90%);
+    background-image: linear-gradient(135deg, #0eeff0 30%, #088f90 90%);
+    z-index: 3;
+    padding: 300px;
+    color: #999;
+}

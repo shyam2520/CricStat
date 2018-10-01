@@ -19,17 +19,40 @@
     </div>
 
     <div class="split right">
-      <div class="wrapper">
-        <div class="block">
-          <center><h1><span style="font-size:70px;position:relative;top:0;">Login</span></h1></center>
-          <form action="">
-            <input type="text" placeholder="Enter your username" class="form-control" required/><br/>
-            <input type="password" placeholder="Enter your password" class="form-control" required/><br/>
-            <center><button type="submit" class="btn btn-primary">Submit <i class="fa fa-paper-plane"></i></button><br/></center>
-          </form>
+      <div id="login-form">
+        <div class="container">
+          <h1 class="form-heading">login Form</h1>
+          <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+                  <h2 style="align:center;font-size:45px">Login</h2>
+                  <p>Please enter your email and password</p>
+                </div>
+                <form id="Login">
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                  </div>
+                  <div class="forgot">
+                    <a href="reset.html">Forgot password?</a>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Signin</button><br/>
+                  <center><p>Or</p></center>
+                  <button id="reg" onclick="window.location.href='/registration'" class="btn btn-primary">Signup</button>
+                </form>
+            </div>
+            <p class="botto-text"> Project by <br/>Shyam Suresh & Shyam Sundar Mylai</p>
+          </div>
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      document.getElementById("reg").onclick = function(){
+        location.href = "www.youtube.com";
+      }
+    </script>
   </body>
 </html>
 

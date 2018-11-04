@@ -18,12 +18,22 @@ def main(user=None):
             insertRec(data)
             return render_template('main.html')
         if(len(data) == 2):
-            return render_template('main.html')
-        return     
-        
+            res = checkDB(data)
+            if res=='iuser':
+                return '<h1><strong>Invalid Username!</strong></h1><br/><a href="/">Try again</a>'     
+            if res=='pass':
+                return render_template('main.html')
+            return '<h1><strong>Invalid Password!</strong></h1><br/><a href="/">Try again</a>'   
+        return '<h1><strong>Please Login first!</strong></h1><br/><a href="/">Login</a>'
 
-def checkDB():
-    prof = db["profiles"]
+def checkDB(cred):
+    name = cred['username']
+    rec = prof.find_one({'username':name})
+    if rec == None:
+        return 'iuser'
+    if cred['pswd'] == rec['pswd']:
+        return 'pass'
+    return 'fail'    
 
 def insertRec(user):
     prof.insert_one(user)

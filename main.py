@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import json
 import pymongo
+import requests
+import json
 
 app = Flask(__name__)
 
@@ -9,7 +11,6 @@ def index():
     return render_template('login.html')
 
 @app.route('/main', methods=['POST'])
-@app.route('/main/<user>', methods=['POST'])
 def main(user=None):
     if request.method == 'POST':
         data = json.loads(json.dumps(request.form))
@@ -37,6 +38,47 @@ def checkDB(cred):
 
 def insertRec(user):
     prof.insert_one(user)
+
+    
+@app.route('/main/matches')
+def matches():
+    #route-1
+    '''
+    APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
+    baseUrl = 'http://cricapi.com/api/matches?'
+    url = baseUrl + 'apikey=' + APIKey
+    matchesData = requests.get(url).json()
+
+
+    #storing data
+    f = open('matches.json', 'w+')
+    f.write(json.dumps(matchesData))
+    f.close()
+    '''
+
+    #route-2
+    f = open('matches.json', 'r+')
+    matchesData = json.loads(f.read())
+    currMatchList = set()
+    upcMatchList = set()
+
+    matchList = matchesData['matches']
+    for match in matchList:
+        if match['team-1'] == 'TBA':
+            pass
+        elif match["matchStarted"]:
+            info = (match['unique_id'], match['team-1'] + ' vs ' + match['team-2'], match['type'], match['toss_winner_team'])
+            currMatchList.add(info)
+        else:
+            info = (match['unique_id'], match['team-1'] + ' vs ' + match['team-2'], match['type'], match['dateTimeGMT'].split('T')[1].split('.')[0] )
+            upcMatchList.add(info)
+
+    return render_template('matches.html', curr = currMatchList, upc = upcMatchList)
+
+@app.route('/main/score')
+def score():
+    print('Hello')
+    return '<h1>Hey There</h1>' 
 
 if __name__ == '__main__':
     client = pymongo.MongoClient("mongodb://localhost/cricstat")

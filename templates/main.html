@@ -3,6 +3,18 @@
 <head>
     <title>HOME PAGE</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../static/main.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('a#test').bind('click', function() {
+            $.getJSON('/main/score',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
 </head>
 <style>
 #myVideo {
@@ -22,8 +34,10 @@
                     Your browser does not support HTML5 video.
                   </video>
                   <ul>
-                        <li ><a href="#" data-text="user login">CURRENT MATCH</a> </li>
-                        <li ><a href="#" data-text="admin login">UPCOMING MATCH</a> </li>
+                        <li ><a href="/main/matches" data-text="user login">MATCHES AND SCORES</a> </li>
+                        <li ><a href="/main/news" data-text="admin login">LATEST NEWS</a> </li>
+                        <li ><a href="/main/form">FORM ANALYSIS</a> </li>
+                        <li ><a href='/main/score' id=test><button class='btn btn-default'>Test</button></a></li>
                     </ul>
         </div>
         
@@ -31,5 +45,7 @@
 </body>
 </html>
 
-<h1><strong>Please login here first!</strong></h1>
-<a href="/">Login Page</a>
+
+
+
+

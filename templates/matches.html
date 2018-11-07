@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <h1 style="align:center">MATCHES</h1><hr/><br/>
+</head>
+    <h2>CURRENT MATCHES</h2><br/>
+    <h3>MATCH               |            TYPE             |         TOSS</h3>
+    <ol>
+    {% for match in curr %}
+        <li><button>{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
+    {% endfor %}
+    </ol>
+    <br/><hr/><br/>
+    <h2>UPCOMING MATCHES</h2><br/>
+    <h3>MATCH               |            TYPE             |         DATE/TIME</h3>
+    <ul>
+    {% for match in upc %}
+        <li>{{match[1] + " | " + match[2] + " | " + match[3]}}</li>
+    {% endfor %}
+    </ul>
+</html>

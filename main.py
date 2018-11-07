@@ -11,7 +11,7 @@ def index():
     return render_template('login.html')
 
 @app.route('/main', methods=['POST'])
-def main(user=None):
+def main():
     if request.method == 'POST':
         data = json.loads(json.dumps(request.form))
         print(data)
@@ -59,9 +59,7 @@ def matches():
     #route-2
     f = open('matches.json', 'r+')
     matchesData = json.loads(f.read())
-    currMatchList = set()
-    upcMatchList = set()
-
+    
     matchList = matchesData['matches']
     for match in matchList:
         if match['team-1'] == 'TBA':
@@ -75,13 +73,38 @@ def matches():
 
     return render_template('matches.html', curr = currMatchList, upc = upcMatchList)
 
-@app.route('/main/score')
-def score():
-    print('Hello')
-    return '<h1>Hey There</h1>' 
+@app.route('/main/score/<matchId>')
+def score(matchId):
+    #route1
+    '''APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
+    baseUrl = 'https://cricapi.com/api/cricketScore?'
+    url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId
+    matchData = requests.get(url).json()
+
+    f = open('matchData.json', 'w+')
+    f.write(json.dumps(matchData))
+    f.close()
+    '''
+
+    f = open('matchData.json', 'r+')
+    matchData = json.loads(f.read())
+
+    team1, team2 = matchData['score'].split('v')
+    team = [team1.strip(), team2.strip()]
+    
+    match = None
+    for m in currMatchList:
+        if m[0] == int(matchId):
+            match = m
+            break
+    if match == None:
+        match = (0, 'Match Not Found!', '', '')
+    return render_template('score.html', team_sc = team, match = match)
 
 if __name__ == '__main__':
     client = pymongo.MongoClient("mongodb://localhost/cricstat")
     db = client["cricstat"]
     prof = db["profiles"]
+    currMatchList = set()
+    upcMatchList = set()
     app.run(debug=True, port=5000)

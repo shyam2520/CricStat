@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <head>
     <h1 style="align:center">MATCHES</h1><hr/><br/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script>
+		function postdata(id){
+            console.log(id);
+            window.location.href = "/main/score/" + id
+		}
+     
+	</script>
 </head>
     <h2>CURRENT MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         TOSS</h3>
     <ol>
     {% for match in curr %}
-        <li><button>{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
+        <li><button id={{match[0]}} onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
     {% endfor %}
     </ol>
     <br/><hr/><br/>

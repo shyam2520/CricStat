@@ -10,10 +10,19 @@
             window.location.href = "/main/score/" + id
 		}
      
-	</script>
+    </script>
+    <style>
+    .rca-menu-widget {
+  min-width: 300px;
+  max-width: 100%;
+  background-color: #fff;
+  margin: 10px 0px; }
+  .rca-left-border {
+  border-left: 5px solid #1eb848; }
+  </style>
 </head>
 <body>
- 
+    <div class="rca-menu-widget rca-left-border">
     <h2>CURRENT MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         TOSS</h3>
     <ol>
@@ -21,9 +30,8 @@
         <li><button id={{match[0]}} onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
     {% endfor %}
     </ol>
-    
+</div>
     <br/><hr/><br/>
-   
     <h2>UPCOMING MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         DATE/TIME</h3>
     <ul>

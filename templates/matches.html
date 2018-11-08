@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <head>
         <link rel="stylesheet" type="text/css" media="screen" href="../static/main.css" />
-        <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../css/index.css"/>
-    <h1 style="align-content:center">MATCHES</h1><hr/><br/>
+    <h1 style="text-align:center">MATCHES</h1><hr/><br/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script>
@@ -16,7 +13,7 @@
 	</script>
 </head>
 <body>
-    <div class="rca-medium-widget rca-padding rca-live-season rca-top-border">
+ 
     <h2>CURRENT MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         TOSS</h3>
     <ol>
@@ -24,9 +21,9 @@
         <li><button id={{match[0]}} onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
     {% endfor %}
     </ol>
-    </div>
+    
     <br/><hr/><br/>
-    <div>
+   
     <h2>UPCOMING MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         DATE/TIME</h3>
     <ul>
@@ -34,5 +31,6 @@
         <li>{{match[1] + " | " + match[2] + " | " + match[3]}}</li>
     {% endfor %}
     </ul>
+
 </body>
     </html>

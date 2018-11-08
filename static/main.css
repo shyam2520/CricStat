@@ -72,4 +72,6 @@ ul li a:hover:before{
     opacity: 0.1;
     top: 50%;
 }
-
+h2{
+    color: aqua;
+}

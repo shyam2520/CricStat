@@ -2,8 +2,7 @@
     <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="../css/index.css"/>
-        <h1 style="text-align: center"> Match: {{match[1]}} </h1><hr/><br/><br/> 
-        <style>
+       <style>
                 * {
                     box-sizing: border-box;
                 }
@@ -23,28 +22,50 @@
                 }
                 
                 .content {
-                    position: fixed;
+                    position: relative;
                     bottom: 0;
                     background: rgba(0, 0, 0, 0.5);
-                    color: #f1f1f1;
+                    color: blue;
                     width: 100%;
                     height: 100%;
                     padding: 100px;
                 }
-                
-                
-                </style>
+                .center {
+                    background-color:transparent;
+                    margin-top: 100%;
+    margin: auto;
+    width: 60%;
+    border: 3px solid white;
+    padding: 10px;
+}    </style>
+                <!--.rca-medium-widget {
+  min-width: 350px;
+  max-width: 100%;
+  min-height: 425px;
+  background-color: #fff;
+  margin: 10px 0; }
+  .rca-top-border {
+  border-top: 5px solid #1eb848; }
+  .rca-tab-content {
+  display: none; }
+  .rca-padding {
+  padding: 15px 10px;
+  display: block; }
+  .rca-batting-score, .rca-bowling-score {
+  border-bottom: 1px solid #E6E6E6; }
+!-->
                 </head>
                 <body>
                 
-                <video autoplay muted loop id="myVideo">
-                  <source src="../static/main.mp4" type="video/mp4">
+              <video autoplay muted loop id="myVideo">
+                <source src="{{url_for('static', filename='main.mp4')}}" type="video/mp4">>
                   Your browser does not support HTML5 video.
                 </video>
-                <div class="content">
-        <h2> Live score </h2><br/>
-        <h3> {{team_sc[0]}} </h3><br/>
-        <h3> {{team_sc[1]}} </h3><br/><br/>
-                </div>
+                <div class="content center">
+                        <h1 style="text-align: center"> Match: {{match[1]}} </h1><hr/><br/><br/> 
+        <h2> SCORECARD </h2><br/>
+        <h3 class="rca-batting-score rca-padding "> {{team_sc[0]}} </h3><br/>
+        <h3 class="rca-batting-score rca-padding"> {{team_sc[1]}} </h3><br/><br/>
+                </div>  
     </body>
 </html>

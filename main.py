@@ -76,7 +76,8 @@ def matches():
 @app.route('/main/score/<matchId>')
 def score(matchId):
     #route1
-    '''APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
+    '''
+    APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
     baseUrl = 'https://cricapi.com/api/cricketScore?'
     url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId
     matchData = requests.get(url).json()
@@ -91,7 +92,11 @@ def score(matchId):
 
     team1, team2 = matchData['score'].split('v')
     team = [team1.strip(), team2.strip()]
-    
+    if 'amp;' in team[0]:
+        team[0] = team[0].replace('amp;','')
+    if 'amp;' in team[1]:
+        team[1] = team[1].replace('amp;','')    
+
     match = None
     for m in currMatchList:
         if m[0] == int(matchId):

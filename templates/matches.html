@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
-        <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='main.css')}}" />
-    <h1 style="text-align:center">MATCHES</h1><hr/><br/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script>
@@ -11,26 +10,117 @@
 		}
      
     </script>
-    <style>
-    .rca-menu-widget {
-  min-width: 300px;
-  max-width: 100%;
-  background-color: #fff;
-  margin: 10px 0px; }
-  .rca-left-border {
-  border-left: 5px solid #1eb848; }
-  </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"/>
+<style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial;
+            font-size: 17px;
+        }
+        
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+        }
+        
+        .content {
+            position: relative;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 100%;
+            height: 100%;
+            padding: 100px;
+        }
+        .center {
+            background-color:transparent;
+            margin-top: 100%;
+margin: auto;
+width: 60%;
+border: 3px solid black;
+padding: 10px;
+}   
+    button{
+        background: none;
+        color:#ccc;
+        width: 240px;
+        height:80px;
+        border: 1px solid #338033;
+        font-size: 18px;
+        border-radius: 4px;
+        transition: .6s;
+        overflow: hidden ;
+
+    }
+    button:focus{
+        outline: none;
+    }
+    button::before{
+        content: " ";
+        display: block;
+        position: absolute;
+       /* background:  rgba(255, 255, 255, .5);
+        */width:60px;
+        height:10%;
+        left:0;
+        top:0;
+        opacity: .5s;
+        filter: blur(30px);
+        transform: translate(-130px) skewX(-15deg);
+
+    }
+    button::after{
+        content: " ";
+        display: block;
+        position: absolute;
+       /* background:  rgba(255, 255, 255, .5);
+        */widows: 20px;
+        height:10%;
+        left:30px;
+        top:0;
+        opacity: 0;
+        filter:blur(30px);
+        transform: translate(-100px) scaleX(-15deg);
+    }
+    button:hover{
+        background: #338033;
+        cursor: pointer;
+    }
+    button:hover:before{
+        transform: translateX(300px) skewX(-15deg);
+        opacity: .6;
+        transition: .7s;
+    }
+    button:hover:after{
+        transform: translateX(300px) skewX(-15deg);
+        opacity: 1;
+        transition: .7s;
+    }
+
+ </style>
 </head>
 <body>
-    <div class="rca-menu-widget rca-left-border">
-    <h2>CURRENT MATCHES</h2><br/>
+      <video autoplay muted loop id="myVideo">
+                <source src="{{url_for('static', filename='main.mp4')}}" type="video/mp4">
+                  Your browser does not support HTML5 video.
+                </video>
+     <h1 style="text-align:center" class="content center">MATCHES</h1><hr/><br/>
+  <div class="content center">
+  <h2>CURRENT MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         TOSS</h3>
-    <ol>
+    <ol>    
     {% for match in curr %}
-        <li><button id={{match[0]}} onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
+        <li><button  id="{{match[0]}} " onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
     {% endfor %}
     </ol>
-</div>
     <br/><hr/><br/>
     <h2>UPCOMING MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         DATE/TIME</h3>
@@ -39,6 +129,6 @@
         <li>{{match[1] + " | " + match[2] + " | " + match[3]}}</li>
     {% endfor %}
     </ul>
-
+</div>
 </body>
     </html>

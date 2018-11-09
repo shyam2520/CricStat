@@ -1,5 +1,6 @@
 <!DOCTYPE html>
     <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/> 
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"/>
         <h1 style="text-align: center"> Match: {{match[1]}} </h1><hr/><br/><br/> 
@@ -52,6 +53,7 @@
         <h2> SCORECARD </h2><br/>
         <h3 class="rca-batting-score rca-padding "> {{team_sc[0]}} </h3><br/>
         <h3 class="rca-batting-score rca-padding"> {{team_sc[1]}} </h3><br/><br/>
+        <button class="btn-primary" onclick="window.location.href= window.location.href + '/scorecard'">View Scorecard</button>
                 </div>  
     </body>
 </html>

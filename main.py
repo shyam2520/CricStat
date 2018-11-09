@@ -106,6 +106,51 @@ def score(matchId):
         match = (0, 'Match Not Found!', '', '')
     return render_template('score.html', team_sc = team, match = match)
 
+@app.route("/main/score/<matchId>/scorecard")
+def scorecard(matchId):
+    #route1
+    '''
+    baseUrl = 'https://cricapi.com/api/fantasySummary?'
+    APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3' 
+    url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId    
+    scorecardInfo = requests.get(url).json()
+
+    f = open('scorecard.json', 'w+')
+    f.write(json.dumps(scorecardInfo))
+
+    baseUrl = 'https://cricapi.com/api/cricketScore?'
+    url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId
+    matchData = requests.get(url).json()
+
+    f = open('matchData.json', 'w+')
+    f.write(json.dumps(matchData))
+    f.close()
+    '''
+    #route2
+    f = open('scorecard.json', 'r+')
+    scorecardInfo = json.loads(f.read())
+    f = open('matchData.json', 'r+')
+    matchData = json.loads(f.read())
+
+    team1, team2 = matchData['score'].split('v')
+    team = [team1.strip().split()[1], team2.strip().split()[1]]
+    if 'amp;' in team[0]:
+        team[0] = team[0].replace('amp;','')
+    if 'amp;' in team[1]:
+        team[1] = team[1].replace('amp;','')    
+
+    title = scorecardInfo["data"]["batting"][0]["title"], scorecardInfo["data"]["batting"][1]["title"] 
+    scores = scorecardInfo["data"]["batting"][0]["scores"], scorecardInfo["data"]["batting"][1]["scores"]
+    bowling = scorecardInfo["data"]["bowling"][0]["scores"], scorecardInfo["data"]["bowling"][1]["scores"]
+    #scores[0][len(scores[0])-1]["pid"] = scores[0][len(scores[0])-1]["detail"]
+    #scores[1][len(scores[1])-1]["pid"] = scores[1][len(scores[1])-1]["detail"]
+    extras = scores[0][-1]["detail"], scores[1][-1]["detail"]
+    scores = scores[0][:len(scores[0])-1], scores[1][:len(scores[1])-1]
+    #for i in scores:
+    #    print(i["pid"], i["batsman"], i["dismissal-info"], i["R"], i["B"], i["6s"], i["4s"], i["SR"])
+
+    return render_template('scorecard.html', title = title, scorecard = scores, extras = extras, bowling = bowling)
+
 if __name__ == '__main__':
     client = pymongo.MongoClient("mongodb://localhost/cricstat")
     db = client["cricstat"]

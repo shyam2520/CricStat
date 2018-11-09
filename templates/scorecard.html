@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CricStat</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    padding: 5px;
+                    text-align: left;
+                }
+        </style>
+    </head>
+<body>
+
+<div class="w3-container">
+  <center><h1>Match Statistics</h1></center>
+  <strong><p>Select a team to view its batting and bowling Statistics</p></strong>
+  <div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button tablink w3-red" style="width:50%" onclick="openCity(event,'Bat1')">{{title[0]}}</button>
+    <button class="w3-bar-item w3-button tablink" style="width: 50%" onclick="openCity(event,'Bat2')">{{title[1]}}</button>
+  </div>
+  <div id="Bat1" class="w3-container w3-border team">  
+    <table style="width:100%;">
+        <center><h3>{{title[0].replace("Innings", "")}}</h3></center>
+        <caption><h4>Batting Stats</h4></caption>
+            <tr>
+                <th>Batsman</th>
+                <th>Dismissal Info</th>
+                <th>Runs</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>Strike Rate</th>
+            </tr>
+            {% for bat in scorecard[0] %}
+            <tr>
+                <td>{{ bat["batsman"] }}</td>
+                <td>{{ bat["dismissal-info"] }}</td>
+                <td>{{ bat["R"] }} ({{bat["B"]}})</td>
+                <td>{{ bat["4s"] }}</td> 
+                <td>{{ bat["6s"] }}</td>
+                <td>{{ bat["SR"] }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>Extras</td>
+                <td>{{extras[0]}}</td>
+            </tr>
+
+    </table><hr/>
+    <table style="width:100%;">
+            <center><h3>{{title[1].replace("Innings", "")}}</h3></center>
+            <caption><h4>Bowling Stats</h4></caption>
+                <tr>
+                    <th>Bowler</th>
+                    <th>Overs</th>
+                    <th>Maidens</th>
+                    <th>Runs</th>
+                    <th>Wickets</th>
+                    <th>Economy</th>
+                    <th>Dots</th>
+                </tr>
+                {% for bwl in bowling[0] %}
+                <tr>
+                    <td>{{ bwl["bowler"] }}</td>
+                    <td>{{ bwl["O"] }}</td>
+                    <td>{{ bwl["M"] }}</td>
+                    <td>{{ bwl["R"] }}</td> 
+                    <td>{{ bwl["W"] }}</td>
+                    <td>{{ bwl["Econ"] }}</td>
+                    <td>{{ bwl["0s"] }}</td>
+                </tr>
+                {% endfor %}            
+    </table>          
+    <br/>
+  </div>
+
+  <div id="Bat2" class="w3-container w3-border team" style="display:none">
+    <table style="width:100%;">
+            <center><h3>{{title[1].replace("Innings", "")}}</h3></center>
+            <tr>
+                <th>Batsman</th>
+                <th>Dismissal Info</th>
+                <th>Runs</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>Strike Rate</th>
+            </tr>
+            {% for bat in scorecard[1] %}
+            <tr>
+                <td>{{ bat["batsman"] }}</td>
+                <td>{{ bat["dismissal-info"] }}</td>
+                <td>{{ bat["R"] }} ({{bat["B"]}})</td>
+                <td>{{ bat["4s"] }}</td> 
+                <td>{{ bat["6s"] }}</td>
+                <td>{{ bat["SR"] }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>Extras</td>
+                <td>{{extras[1]}}</td>
+            </tr>
+    </table><hr/> 
+    <table style="width:100%;">
+            <center><h3>{{title[0].replace("Innings", "")}}</h3></center>
+            <caption><h4>Bowling Stats</h4></caption>
+                <tr>
+                    <th>Bowler</th>
+                    <th>Overs</th>
+                    <th>Maidens</th>
+                    <th>Runs</th>
+                    <th>Wickets</th>
+                    <th>Economy</th>
+                    <th>Dots</th>
+                </tr>
+                {% for bwl in bowling[1] %}
+                <tr>
+                    <td>{{ bwl["bowler"] }}</td>
+                    <td>{{ bwl["O"] }}</td>
+                    <td>{{ bwl["M"] }}</td>
+                    <td>{{ bwl["R"] }}</td> 
+                    <td>{{ bwl["W"] }}</td>
+                    <td>{{ bwl["Econ"] }}</td>
+                    <td>{{ bwl["0s"] }}</td>
+                </tr>
+                {% endfor %}            
+    </table>          
+    <br/>
+  </div>
+</div>
+
+<script>
+function openCity(evt, team) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("team");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(team).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

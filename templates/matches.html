@@ -11,7 +11,7 @@
      
     </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/index.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"/>
 <style>
         * {
             box-sizing: border-box;
@@ -45,22 +45,80 @@
             margin-top: 100%;
 margin: auto;
 width: 60%;
-border: 3px solid yellowgreen;
+border: 3px solid black;
 padding: 10px;
-}    </style>
+}   
+    button{
+        background: none;
+        color:#ccc;
+        width: 240px;
+        height:80px;
+        border: 1px solid #338033;
+        font-size: 18px;
+        border-radius: 4px;
+        transition: .6s;
+        overflow: hidden ;
+
+    }
+    button:focus{
+        outline: none;
+    }
+    button::before{
+        content: " ";
+        display: block;
+        position: absolute;
+       /* background:  rgba(255, 255, 255, .5);
+        */width:60px;
+        height:10%;
+        left:0;
+        top:0;
+        opacity: .5s;
+        filter: blur(30px);
+        transform: translate(-130px) skewX(-15deg);
+
+    }
+    button::after{
+        content: " ";
+        display: block;
+        position: absolute;
+       /* background:  rgba(255, 255, 255, .5);
+        */widows: 20px;
+        height:10%;
+        left:30px;
+        top:0;
+        opacity: 0;
+        filter:blur(30px);
+        transform: translate(-100px) scaleX(-15deg);
+    }
+    button:hover{
+        background: #338033;
+        cursor: pointer;
+    }
+    button:hover:before{
+        transform: translateX(300px) skewX(-15deg);
+        opacity: .6;
+        transition: .7s;
+    }
+    button:hover:after{
+        transform: translateX(300px) skewX(-15deg);
+        opacity: 1;
+        transition: .7s;
+    }
+
+ </style>
 </head>
 <body>
       <video autoplay muted loop id="myVideo">
-                <source src="{{url_for('static', filename='main.mp4')}}" type="video/mp4">>
-                  Your browser does not support HTML5 video.-+
+                <source src="{{url_for('static', filename='main.mp4')}}" type="video/mp4">
+                  Your browser does not support HTML5 video.
                 </video>
-                <h1 style="text-align:center" class="content center">MATCHES</h1><hr/><br/>
+     <h1 style="text-align:center" class="content center">MATCHES</h1><hr/><br/>
   <div class="content center">
   <h2>CURRENT MATCHES</h2><br/>
     <h3>MATCH               |            TYPE             |         TOSS</h3>
-    <ol>
+    <ol>    
     {% for match in curr %}
-        <li><button id={{match[0]}} onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
+        <li><button  id="{{match[0]}} " onclick="postdata(this.id)">{{match[1] + " | " + match[2] + " | " + match[3]}}</button></li>
     {% endfor %}
     </ol>
     <br/><hr/><br/>

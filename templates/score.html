@@ -1,8 +1,9 @@
 <!DOCTYPE html>
     <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-            <link rel="stylesheet" href="../css/index.css"/>
-       <style>
+            <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"/>
+        <h1 style="text-align: center"> Match: {{match[1]}} </h1><hr/><br/><br/> 
+        <style>
                 * {
                     box-sizing: border-box;
                 }
@@ -33,27 +34,12 @@
                 .center {
                     background-color:transparent;
                     margin-top: 100%;
+                    border-radius: 50px;
     margin: auto;
     width: 60%;
     border: 3px solid white;
     padding: 10px;
 }    </style>
-                <!--.rca-medium-widget {
-  min-width: 350px;
-  max-width: 100%;
-  min-height: 425px;
-  background-color: #fff;
-  margin: 10px 0; }
-  .rca-top-border {
-  border-top: 5px solid #1eb848; }
-  .rca-tab-content {
-  display: none; }
-  .rca-padding {
-  padding: 15px 10px;
-  display: block; }
-  .rca-batting-score, .rca-bowling-score {
-  border-bottom: 1px solid #E6E6E6; }
-!-->
                 </head>
                 <body>
                 

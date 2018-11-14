@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request
+from bs4 import BeautifulSoup
+import urllib.request
 import json
 import pymongo
 import requests
 import json
+
 
 app = Flask(__name__)
 
@@ -43,7 +46,7 @@ def insertRec(user):
 @app.route('/main/matches')
 def matches():
     #route-1
-    '''
+    
     APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
     baseUrl = 'http://cricapi.com/api/matches?'
     url = baseUrl + 'apikey=' + APIKey
@@ -54,11 +57,11 @@ def matches():
     f = open('matches.json', 'w+')
     f.write(json.dumps(matchesData))
     f.close()
-    '''
+    
 
     #route-2
-    f = open('matches.json', 'r+')
-    matchesData = json.loads(f.read())
+    #f = open('matches.json', 'r+')
+    #matchesData = json.loads(f.read())
     
     matchList = matchesData['matches']
     for match in matchList:
@@ -73,10 +76,28 @@ def matches():
 
     return render_template('matches.html', curr = currMatchList, upc = upcMatchList)
 
+@app.route('/main/latestNews', methods=['GET', 'POST'])
+def latestNews():
+    if request.method == 'GET':
+        return render_template('searchbar.html')
+    else:
+        data = json.loads(json.dumps(request.form))
+        playerName = data['playerName'].replace(" ", "%20")
+        resp = urllib.request.urlopen("https://news.google.com/search?q=" + playerName + "&hl=en-IN&gl=IN&ceid=IN%3Aen")
+        soup = BeautifulSoup(resp, from_encoding=resp.info().get_param('charset'))
+        links = []
+        for link in soup.find_all('a', href=True):
+            if link['href'][0:2] == './':
+                links.append('https://news.google.com' + link['href'][1:]) 
+            else:
+                links.append(link['href'])
+            print("\n") 
+        return render_template('searchbar.html', links = links)  
+
 @app.route('/main/score/<matchId>')
 def score(matchId):
     #route1
-    '''
+    
     APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
     baseUrl = 'https://cricapi.com/api/cricketScore?'
     url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId
@@ -85,10 +106,10 @@ def score(matchId):
     f = open('matchData.json', 'w+')
     f.write(json.dumps(matchData))
     f.close()
-    '''
-
-    f = open('matchData.json', 'r+')
-    matchData = json.loads(f.read())
+    
+    #route2
+    #f = open('matchData.json', 'r+')
+    #matchData = json.loads(f.read())
 
     team1, team2 = matchData['score'].split('v')
     team = [team1.strip(), team2.strip()]
@@ -109,7 +130,7 @@ def score(matchId):
 @app.route("/main/score/<matchId>/scorecard")
 def scorecard(matchId):
     #route1
-    '''
+    
     baseUrl = 'https://cricapi.com/api/fantasySummary?'
     APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3' 
     url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId    
@@ -125,12 +146,12 @@ def scorecard(matchId):
     f = open('matchData.json', 'w+')
     f.write(json.dumps(matchData))
     f.close()
-    '''
+    
     #route2
-    f = open('scorecard.json', 'r+')
-    scorecardInfo = json.loads(f.read())
-    f = open('matchData.json', 'r+')
-    matchData = json.loads(f.read())
+    #f = open('scorecard.json', 'r+')
+    #scorecardInfo = json.loads(f.read())
+    #f = open('matchData.json', 'r+')
+    #matchData = json.loads(f.read())
 
     team1, team2 = matchData['score'].split('v')
     team = [team1.strip().split()[1], team2.strip().split()[1]]

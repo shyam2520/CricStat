@@ -8,7 +8,7 @@
     body{
         margin:0;
         padding: 0;
-        background:url(https://i.pinimg.com/originals/2c/12/4c/2c124cfffbfd08fbeed987c4187d708e.jpg);
+        background: url(https://i.pinimg.com/originals/2c/12/4c/2c124cfffbfd08fbeed987c4187d708e.jpg);
         background-size:cover;
         font-family: sans-serif;
         }
@@ -131,16 +131,14 @@ ul li a:hover:before{
 <body>
     <div class="box">
         <h1>PLAYER SEARCH </h1>
-    <form action="https://www.google.com/search" method="GET">
-    <input type="text" name="q" placeholder="enter your player">
+    <form action="/main/latestNews" method="POST">
+    <input type="text" name="playerName" placeholder="Enter your favourite player">
     <input type="submit" value="search"></form></div><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <div>
-          <ul>
-                  <li ><a href="#" >link1</a> </li>
-                  <li ><a href="#" >link2</a> </li>
-                  <li ><a href="#" >link3</a> </li>
-                  <li ><a href="#" >link4</a> </li>
-                  <li ><a href="#" >link5</a> </li>
-              </ul>
-  </div>
+        <ul>
+            {% for link in links %}
+                <li ><a style="text-transform: lowercase" href="{{link}}" >{{link}}</a> </li>
+            {% endfor %}      
+        </ul>
+    </div>
 </body>

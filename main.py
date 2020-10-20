@@ -5,7 +5,7 @@ import json
 import pymongo
 import requests
 import json
-
+from creds import CRIC_STAT_API_KEY
 
 app = Flask(__name__)
 
@@ -47,7 +47,7 @@ def insertRec(user):
 def matches():
     #route-1
     
-    APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
+    APIKey = CRIC_STAT_API_KEY
     baseUrl = 'http://cricapi.com/api/matches?'
     url = baseUrl + 'apikey=' + APIKey
     matchesData = requests.get(url).json()
@@ -98,7 +98,7 @@ def latestNews():
 def score(matchId):
     #route1
     
-    APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3'
+    APIKey = CRIC_STAT_API_KEY
     baseUrl = 'https://cricapi.com/api/cricketScore?'
     url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId
     matchData = requests.get(url).json()
@@ -132,7 +132,7 @@ def scorecard(matchId):
     #route1
     
     baseUrl = 'https://cricapi.com/api/fantasySummary?'
-    APIKey = 'g1MzozftmigqEmKPxGLyEoimYJJ3' 
+    APIKey = CRIC_STAT_API_KEY
     url = baseUrl + 'apikey=' + APIKey + '&unique_id=' + matchId    
     scorecardInfo = requests.get(url).json()
 
